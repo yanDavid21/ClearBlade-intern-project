@@ -1,46 +1,20 @@
-# Getting Started with Create React App
+# ClearBlade intern challenge
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Requirements:
+- Use React and TypeScript
+- Use the ClearBlade JavaScript SDK (npm i --save clearblade-js-client)
+- Note that this package incudes a TypeScript definition file that you can use within your
+project ( let us know if you have any issues with type definitions)
+- Fetch rows from a ClearBlade Collection and display them in the UI
+- Allow users to toggle the status of a ToDo with an HTML checkbox
+- Update the row in the ClearBlade Collection when a ToDo is toggled in the app
 
-## Available Scripts
+## Deliverables:
+- GitHub repository that contains all of the client-side code
+- Share your ClearBlade system with aalcott@clearblade.com once you’re done by adding me
+as a developer to the system (Info -> System Settings -> Access)
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Takeaways:
+- There are edge cases within UI functionality not just input-output functions (ie. realized a user could have a ridicuously long label in to do task, added overflow:auto for a fix)
+- A lot of things I should've done better to make cleaner code. But it's good to release the MVP and not waste too much time in polishing the unimportant
+- The typing in Typescript is super useful! Alias typing cleaned up the code a lot, but oh man the Item API was a bit difficult to figure out with TS's strict typing. Learning moment: if type is unknown by Typescript until run time, just declare it as any instead of forcing it into a Type.

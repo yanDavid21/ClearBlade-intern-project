@@ -1,0 +1,120 @@
+.to-do-container {
+    width: 100vw;
+    height: 60vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+    color: white;
+    border-radius:12em;
+    font-size: 1.75em;
+    min-height:90vh;
+}
+
+.to-do-summary {
+    box-sizing: border-box;
+    display:flex;
+    background-color: rgb(29, 29, 29);
+}
+
+.to-do-taskboard {
+    box-sizing: border-box;
+    background-color: rgb(255, 253, 253);
+    overflow:auto;
+    padding:1em;
+    color:black;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.task {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width:100%;
+    padding:.75em;
+    border-width:1px;
+    border-color:black;
+    border-style:solid;
+    overflow: auto;
+}
+
+.task-label {
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+}
+
+.task-label > * {
+    margin-right: 1em;
+}
+
+input {
+    width:2em;
+}
+
+/* Extra extra small devices (phones, 400px and down) */
+@media only screen and (max-width: 400px) {
+    .to-do-summary {
+        flex-direction:row;
+        justify-content:space-around;
+        flex-wrap:wrap;
+        align-items: center;
+        width:100%;
+        font-size:.3em;
+        max-height:10vh;
+    }
+
+    .to-do-taskboard {
+        width: 100%;
+        font-size:.75em;
+    }
+}
+
+/* Extra small devices (phones, 600px and up) */
+@media only screen and (min-width: 400px) {
+    .to-do-summary {
+        flex-direction:row;
+        justify-content:space-around;
+        flex-wrap:wrap;
+        align-items: center;
+        width:100%;
+        font-size:.5em;
+        max-height:100px;
+    }
+
+    .to-do-taskboard {
+        width: 100%;
+        font-size:1.25em;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .to-do-summary {
+        flex-direction:row;
+        justify-content:space-around;
+        flex-wrap:wrap;
+        align-items: center;
+        width:100%;
+        font-size:.75em;
+        max-height:20vh;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .to-do-summary {
+        flex-direction:column;
+        justify-content:space-around;
+        width:20%;
+        max-height:100vh;
+    }
+
+    .to-do-taskboard {
+        width: 80%;
+    }
+}
+
+

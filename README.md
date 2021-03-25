@@ -1,6 +1,6 @@
 # ClearBlade intern challenge
 
-| ![Desktop image of app](./src/resources/desktop.png) | 
+| ![Desktop image of app](./src/resources/desktop.PNG) | 
 |:--:| 
 | *Reminds me I need to take that UI/UX class I've been eyeing soon* |
 

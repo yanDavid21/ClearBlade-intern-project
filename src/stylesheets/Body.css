@@ -3,26 +3,40 @@
     height: 60vh;
     display: flex;
     flex-direction: row;
-    flex-wrap:wrap;
     color: white;
-    border-radius:12em;
+    border-radius: 12em;
     font-size: 1.75em;
-    min-height:90vh;
+    min-height: 90vh;
+}
+
+.to-do-body {
+    display:flex;
+    flex-direction: column;
 }
 
 .to-do-summary {
     box-sizing: border-box;
-    display:flex;
+    display: flex;
     background-color: rgb(29, 29, 29);
+}
+
+.to-do-summary button {
+    padding: 1em 2em 1em 2em;
+    border-width: 1px;
+    border-color: white;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+    width:60%;
 }
 
 .to-do-taskboard {
     box-sizing: border-box;
     background-color: rgb(255, 253, 253);
-    overflow:auto;
-    padding:1em;
-    color:black;
-    display:flex;
+    overflow: auto;
+    padding: 1em;
+    color: black;
+    display: flex;
     flex-direction: column;
     align-items: center;
 }
@@ -32,89 +46,160 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width:100%;
-    padding:.75em;
-    border-width:1px;
-    border-color:black;
-    border-style:solid;
+    width: 100%;
+    padding: .75em;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
     overflow: auto;
 }
 
 .task-label {
     display: flex;
     flex-direction: row;
-    align-items:center;
+    align-items: center;
 }
 
-.task-label > * {
+.task-label>* {
     margin-right: 1em;
 }
 
 input {
-    width:2em;
+    width: 2em;
 }
 
 /* Extra extra small devices (phones, 400px and down) */
-@media only screen and (max-width: 400px) {
-    .to-do-summary {
-        flex-direction:row;
-        justify-content:space-around;
-        flex-wrap:wrap;
-        align-items: center;
-        width:100%;
-        font-size:.3em;
-        max-height:10vh;
-    }
 
+@media only screen and (max-width: 400px) {
+    .to-do-container {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        color: white;
+        border-radius: 12em;
+        font-size: 1.75em;
+        min-height: 90vh;
+    }
+    .to-do-summary {
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        font-size: .5em;
+        max-height: 30vh;
+    }
     .to-do-taskboard {
         width: 100%;
-        font-size:.75em;
+        font-size: .75em;
+    }
+
+    .to-do-summary button {
+        padding: .4em .8em .4em .8em;
+    }
+
+    .to-do-summary > div {
+        display:flex;
+        flex-direction: row;
     }
 }
 
-/* Extra small devices (phones, 600px and up) */
-@media only screen and (min-width: 400px) {
-    .to-do-summary {
-        flex-direction:row;
-        justify-content:space-around;
-        flex-wrap:wrap;
-        align-items: center;
-        width:100%;
-        font-size:.5em;
-        max-height:100px;
-    }
+/* Extra small devices (phones, 400px and up) */
 
+@media only screen and (min-width: 400px) {
+    .to-do-container {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        color: white;
+        border-radius: 12em;
+        font-size: 1.75em;
+        min-height: 90vh;
+    }
+    .to-do-summary {
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        font-size: .5em;
+        max-height: 30vh;
+    }
     .to-do-taskboard {
         width: 100%;
-        font-size:1.25em;
+        font-size: 1.25em;
+    }
+
+    .to-do-summary > div {
+        display:flex;
+        flex-direction: row;
     }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
+
 @media only screen and (min-width: 600px) {
     .to-do-summary {
-        flex-direction:row;
-        justify-content:space-around;
-        flex-wrap:wrap;
+        flex-direction: row;
+        justify-content: space-around;
+        flex-wrap: wrap;
         align-items: center;
-        width:100%;
-        font-size:.75em;
-        max-height:20vh;
+        width: 100%;
+        font-size: .75em;
+        max-height: 20vh;
     }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
+
 @media only screen and (min-width: 992px) {
-    .to-do-summary {
-        flex-direction:column;
-        justify-content:space-around;
-        width:20%;
-        max-height:100vh;
+    .to-do-container {
+        width: 100vw;
+        height: 40vh;
+        display: flex;
+        flex-direction: row;
+        color: white;
+        border-radius: 12em;
+        font-size: 1.75em;
+        min-height: 90vh;
     }
 
-    .to-do-taskboard {
+    .to-do-summary {
+        flex-direction: column;
+        justify-content: space-around;
+        width: 20%;
+        max-height: 100vh;
+        font-size: 1em;
+    }
+
+    .to-do-body {
         width: 80%;
     }
+    .to-do-summary  button span {
+        display: inline-block;
+        position: relative;
+        transition: visibility 0s, opacity 0.5s linear;
+    }
+
+    .to-do-summary > div > button > .summary-number {
+        opacity:0;
+        position: absolute; 
+        visibility: hidden;
+        padding-left:.5em;
+    }
+
+    .to-do-summary > div> button:hover >.summary-number {
+        opacity: 1;
+        position: relative; 
+        visibility: visible;
+    }
+
+    .to-do-summary > div {
+        display:flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        height: 40%;
+        width: 100%;
+    }
 }
-
-

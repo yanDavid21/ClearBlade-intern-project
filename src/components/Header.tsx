@@ -9,7 +9,7 @@ function Header(): JSX.Element{
   return (
     <div className="header">
       <img src={ClearbladeLogo} alt="Clearblade logo" className="logo" />
-      <h1>To Do</h1>
+      <h1>ClearBlade Planner</h1>
       <button className="source" onClick={(e) => {
         e.preventDefault();
         window.location.href = 'https://github.com/yanDavid21/ClearBlade-intern-project';

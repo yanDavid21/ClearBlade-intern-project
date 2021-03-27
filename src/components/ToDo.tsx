@@ -67,7 +67,7 @@ export default function ToDo({task}: { task: Task }) {
                 <input
                     name="is_done"
                     type="checkbox"
-                    defaultChecked={task.is_done}
+                    checked={task.is_done}
                     onChange={(e) => updateCollections(e, task.item_id)} />
             </div>
             <div>{trimDateTime(task.due_date)}</div>

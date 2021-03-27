@@ -36,6 +36,7 @@
     border-radius:.75em;
     background-color: Transparent;
     background-repeat:no-repeat;
+    cursor: pointer;
 }
 
 /* Extra small devices (phones, 600px and down) */
@@ -51,5 +52,12 @@
     .source {
         font-size: 1em;
         padding: 1em;
+    }
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 450px) {
+    .header {
+        font-size: .75em;
     }
 }

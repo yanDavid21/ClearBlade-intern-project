@@ -9,8 +9,30 @@
     min-height: 90vh;
 }
 
-.to-do-body {
+.message-input {
     display:flex;
+    flex-direction: row;
+    align-items: center;
+    background-color:  rgb(29, 29, 29);
+    box-sizing: border-box;
+    padding:1em;
+}
+
+.input-field {
+    width:90%;
+    padding:1em;
+}
+
+.submit-button {
+    width:10%;
+    padding: 1em;
+    background-color:rgb(104, 238, 175);
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.to-do-body {
+    display: flex;
     flex-direction: column;
 }
 
@@ -23,14 +45,21 @@
 .to-do-summary button {
     padding: 1em 2em 1em 2em;
     border-width: 1px;
-    border-color: white;
+    border-color:rgb(104, 238, 175);
     background-color: transparent;
-    color: white;
+    color: rgb(104, 238, 175);;
     cursor: pointer;
-    width:60%;
+    font-weight: 900;
 }
 
-.to-do-taskboard {
+
+.to-do-summary button:hover {
+    background-color:rgb(104, 238, 175);
+    color:black;
+}
+
+
+.to-do-taskboard, .messaging {
     box-sizing: border-box;
     background-color: rgb(255, 253, 253);
     overflow: auto;
@@ -39,6 +68,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    transition: opacity .5s, linear
 }
 
 .task {
@@ -51,7 +81,6 @@
     border-width: 1px;
     border-color: black;
     border-style: solid;
-    overflow: auto;
 }
 
 .task-label {
@@ -66,6 +95,21 @@
 
 input {
     width: 2em;
+}
+
+.message-display, .message-input {
+    border-width: 1px;
+    width: 100%;
+    border-color: black;
+    border-style: solid;
+}
+
+.message-display {
+    height: 90vh;
+}
+
+.message-input {
+    height: 10vh;
 }
 
 /* Extra extra small devices (phones, 400px and down) */
@@ -93,14 +137,16 @@ input {
         width: 100%;
         font-size: .75em;
     }
-
     .to-do-summary button {
         padding: .4em .8em .4em .8em;
+        width:50%;
     }
-
-    .to-do-summary > div {
-        display:flex;
+    .to-do-summary>div {
+        display: flex;
         flex-direction: row;
+    }
+    .to-do-taskboard, .messaging {
+        padding: .2em;
     }
 }
 
@@ -125,13 +171,17 @@ input {
         font-size: .5em;
         max-height: 30vh;
     }
+
+    .to-do-summary button{
+        width:50%;
+    }
+
     .to-do-taskboard {
         width: 100%;
         font-size: 1.25em;
     }
-
-    .to-do-summary > div {
-        display:flex;
+    .to-do-summary>div {
+        display: flex;
         flex-direction: row;
     }
 }
@@ -163,7 +213,6 @@ input {
         font-size: 1.75em;
         min-height: 90vh;
     }
-
     .to-do-summary {
         flex-direction: column;
         justify-content: space-around;
@@ -171,35 +220,35 @@ input {
         max-height: 100vh;
         font-size: 1em;
     }
-
     .to-do-body {
         width: 80%;
     }
-    .to-do-summary  button span {
+    .to-do-summary button span {
         display: inline-block;
         position: relative;
-        transition: visibility 0s, opacity 0.5s linear;
+        transition: visibility 0s, opacity 0.25s ease;
     }
-
-    .to-do-summary > div > button > .summary-number {
-        opacity:0;
-        position: absolute; 
+    .to-do-summary>div>button>.summary-number {
+        opacity: 0;
+        position: absolute;
         visibility: hidden;
-        padding-left:.5em;
+        padding-left: .5em;
     }
-
-    .to-do-summary > div> button:hover >.summary-number {
+    .to-do-summary>div>button:hover>.summary-number {
         opacity: 1;
-        position: relative; 
+        position: relative;
         visibility: visible;
     }
-
-    .to-do-summary > div {
-        display:flex;
+    .to-do-summary>div {
+        display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
         height: 40%;
         width: 100%;
+    }
+
+    .to-do-summary button{
+        width:80%;
     }
 }

@@ -6,18 +6,17 @@ import TaskBoard from './TaskBoard';
 import SummaryPanel, { SummaryProps } from './SummaryPanel';
 
 /**
- * This functional component represents the main component of the app holding the tasks to be done.
- * @param param0 an object that has SummaryProps and a list of tasks
- * @returns a component with a summary component and displays a list of tasks
+ * This functional component represents the main component of the app holding a summary panel, the tasks to be done, and messaging.
+ * @param param0 an object that has SummaryProps and a list of tasks, a flag to determine what the body should show, a function that sets the state
+ * @returns a component with a summary component and displays a list of tasks or a messaging board
  */
-
-
-function ToDoContainer({ summary, tasks, display, setDisplay }: { summary: SummaryProps, tasks: Task[], display: Display, setDisplay: any }): JSX.Element {
+function ToDoContainer({ summary, tasks, display, setDisplay }: { summary: SummaryProps, tasks: Task[], display: Display,
+     setDisplay: React.Dispatch<React.SetStateAction<Display>> }): JSX.Element {
     return (
         <div className="to-do-container">
-           <SummaryPanel summary= {summary}></SummaryPanel>
+           <SummaryPanel summary= {summary} setDisplay = {setDisplay}></SummaryPanel>
             <div className="to-do-body">
-                <TaskBoard display={display} tasks={tasks} />
+                <TaskBoard display={display} tasks={tasks}/>
                 <Messaging display={display} />
             </div>
         </div>

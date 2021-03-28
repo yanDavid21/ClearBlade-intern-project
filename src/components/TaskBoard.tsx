@@ -18,10 +18,13 @@ function renderRows(tasks: Task[]): JSX.Element[] {
     );
 }
 
-export default function TaskBoard({ display, tasks }: { display: Display, tasks: Task[] }):JSX.Element {
+export default function TaskBoard({ display, tasks }: { display: Display, tasks: Task[] }): JSX.Element {
     return (
-        <div className="to-do-taskboard" style={{ display: display === Display.TaskBoard ? "inherit" : "none" }}>
+        <div className="to-do-taskboard" style={{
+            display: display === Display.TaskBoard ? "inherit" : "none",
+            opacity: display === Display.TaskBoard ? 1 : 0
+        }}>
             {renderRows(tasks)}
-        </div> 
+        </div>
     )
 }

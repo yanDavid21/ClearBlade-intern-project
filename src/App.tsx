@@ -15,14 +15,14 @@ function App(): JSX.Element {
   //this state represents the list of tasks in the collection
   const [tasksState, setTasks] = useState<Task[]>([]);
   //this object contains the total of tasks in Collection (and as bonus the number of tasks that are done)
-  const [taskData, setTasksData] = useState({ tasks_done: 0, tasks_total: 0 });
+  const [taskData, setTasksData] = useState({ tasks_done: 0, tasks_total: 0, messages: 0});
   //this state represents what component should be displayed
   const [display, setDisplay] = useState(Display.TaskBoard);
 
   //initiate collection connection and fetch data in component initialization 
   useEffect(() => {
     const cb = initializeClearBlade();
-    fetchTasksFromCollection(cb, setTasks, setTasksData, setDisplay);
+    fetchTasksFromCollection(cb, setTasks, setTasksData);
   }, [])
 
   return (
@@ -37,15 +37,19 @@ function App(): JSX.Element {
  * This callback function is used when connecting to the collection in the mounting of the App component.
  * @param err whether the mounting of the component failed
  */
-function initCallback(err: boolean) {
+function initCallback(err: boolean, cb:IClearBlade): void {
   if (err) {
     alert("Error connecting to collection :(");
   }
+  subscribeToCollectionUpdates(cb);
 }
 
+/**
+ * Initializes and returns a ClearBlade object.
+ * @returns a clearblade object pointing to David Yan's system
+ */
 function initializeClearBlade(): IClearBlade {
   const cb = new ClearBlade();
-
 
   //TODO: add .env file to hide secrets and user data
   cb.init({
@@ -62,8 +66,14 @@ function initializeClearBlade(): IClearBlade {
   return cb;
 }
 
+/**
+ * Fetch Task data from the Clearblade_Task_TODO collection from the given Clearblade System
+ * @param cb a Clearblade object 
+ * @param setTasks setState method for a list of Tasks
+ * @param setTasksData setState method for task data (SummaryProps)
+ */
 function fetchTasksFromCollection(cb: IClearBlade, setTasks: React.Dispatch<React.SetStateAction<Task[]>>,
-  setTasksData: React.Dispatch<React.SetStateAction<SummaryProps>>, setDisplay: React.Dispatch<React.SetStateAction<Display>>): void {
+  setTasksData: React.Dispatch<React.SetStateAction<SummaryProps>>): void {
   const collection = cb.Collection({ collectionName: 'Clearblade_Task_TODO' });
   const query = cb.Query({ collectionName: 'Clearblade_Task_TODO' });
   query.ascending("due_date");
@@ -73,28 +83,55 @@ function fetchTasksFromCollection(cb: IClearBlade, setTasks: React.Dispatch<Reac
     if (err) {
       alert("An error occurred in fetching data :(");
     } else {
+
+      let taskArray:Task[] = []
+      let numberOfTasksDone = 0;
       dataArray.forEach((collectionRow: any) => {
         let data: any = {}
         for (const key in collectionRow.data) {
           data[key] = collectionRow.data[key];
         }
-        setTasks(tasksState => [...tasksState, data]);
-        setTasksData((prevState: SummaryProps) => ({
-          ...prevState,
-          tasks_total: prevState.tasks_total + 1
-        }))
+
+        //appends data to array that will be taskState
+        taskArray.push(data);
+        //if the data is completed, add 1
         if (data.is_done) {
-          setTasksData((prevState: SummaryProps) => ({
-            ...prevState,
-            tasks_done: prevState.tasks_done + 1
-          }))
+          numberOfTasksDone++;
         }
       })
+
+      //after loop, update state
+      setTasks(taskArray);
+      setTasksData((prevState: SummaryProps) => ({
+        ...prevState,
+        tasks_total: taskArray.length
+      }))
+      setTasksData((prevState: SummaryProps) => ({
+        ...prevState,
+        tasks_done: numberOfTasksDone
+      }))
     }
   })
 }
 
+function subscribeToCollectionUpdates(cb: IClearBlade) {
+  const messaging = cb.Messaging({}, err => {
+    if(err) {
+      console.log(err);
+    }
+  });
+  messaging.subscribe("collection/to_do", {},  function (err, payload) {
+    if (err) {
+      alert("Something went wrong with connecting to messaging server.");
+    } else {
+      console.log(payload);
+    }
+  });
+
+}
 
 
 
 export default App;
+
+

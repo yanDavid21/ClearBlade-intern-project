@@ -13,11 +13,6 @@ project ( let us know if you have any issues with type definitions)
 - Allow users to toggle the status of a ToDo with an HTML checkbox
 - Update the row in the ClearBlade Collection when a ToDo is toggled in the app
 
-## Deliverables:
-- GitHub repository that contains all of the client-side code
-- Share your ClearBlade system with aalcott@clearblade.com once you’re done by adding me
-as a developer to the system (Info -> System Settings -> Access)
-
 ## Takeaways:
 - There are edge cases within UI functionality not just input-output functions (ie. realized a user could have a ridicuously long label in to do task, added overflow:auto for a fix)
 - A lot of things I should've done better to make cleaner code and to make it less of an eyesore. But it's good to release the MVP and not waste too much time in polishing the unimportant

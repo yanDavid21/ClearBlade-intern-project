@@ -5,6 +5,7 @@ import { Task } from './components/ToDo';
 import './App.css';
 import { useEffect, useState } from 'react'
 import { SummaryProps } from './components/SummaryPanel';
+import { Message } from './components/Messaging'
 
 /**
  * This functional component contains the entire application's components (header, body) and the body's components (ToDo container and ToDo's).
@@ -14,21 +15,29 @@ function App(): JSX.Element {
 
   //this state represents the list of tasks in the collection
   const [tasksState, setTasks] = useState<Task[]>([]);
+
+  //this state represents the current messsages in the chat
+  const [messages, setMessages] = useState<Message[]>([{sender:"Clearblade Platform", body: "Welcome!"}])
+
   //this object contains the total of tasks in Collection (and as bonus the number of tasks that are done)
-  const [taskData, setTasksData] = useState({ tasks_done: 0, tasks_total: 0, messages: 0});
+  const [taskData, setTasksData] = useState({ tasks_done: 0, tasks_total: 0, messages: messages.length});
+
   //this state represents what component should be displayed
   const [display, setDisplay] = useState(Display.TaskBoard);
+
+
 
   //initiate collection connection and fetch data in component initialization 
   useEffect(() => {
     const cb = initializeClearBlade();
     fetchTasksFromCollection(cb, setTasks, setTasksData);
+    //subscribeToCollectionUpdates(cb);
   }, [])
 
   return (
     <div className="App">
       <Header></Header>
-      <Body taskData={taskData} tasks={tasksState} display={display} setDisplay={setDisplay}></Body>
+      <Body taskData={taskData} tasks={tasksState} display={display} setDisplay={setDisplay} messages = {messages}></Body>
     </div>
   );
 }
@@ -41,7 +50,6 @@ function initCallback(err: boolean, cb:IClearBlade): void {
   if (err) {
     alert("Error connecting to collection :(");
   }
-  subscribeToCollectionUpdates(cb);
 }
 
 /**
@@ -78,12 +86,11 @@ function fetchTasksFromCollection(cb: IClearBlade, setTasks: React.Dispatch<Reac
   const query = cb.Query({ collectionName: 'Clearblade_Task_TODO' });
   query.ascending("due_date");
 
-  //fetches the collection and pushes each element into the task state
+  //fetches the collection and includes every element into the task state
   collection.fetch(query, (err, dataArray) => {
     if (err) {
       alert("An error occurred in fetching data :(");
     } else {
-
       let taskArray:Task[] = []
       let numberOfTasksDone = 0;
       dataArray.forEach((collectionRow: any) => {
@@ -114,6 +121,10 @@ function fetchTasksFromCollection(cb: IClearBlade, setTasks: React.Dispatch<Reac
   })
 }
 
+/**
+ * Subscribes to topic 'collection/to_do'
+ * @param cb clearblade object
+ */
 function subscribeToCollectionUpdates(cb: IClearBlade) {
   const messaging = cb.Messaging({}, err => {
     if(err) {

@@ -8,6 +8,11 @@ export type SummaryProps = {
     messages: number
 }
 
+/**
+ * This functional component renders a panel that contains buttons to display tasks or messages.
+ * @param param0 an object holding attributes of SummaryProps and a setState method to set the displayed component of the body
+ * @returns a control panel with a summary of tasks and messages 
+ */
 export default function SummaryPanel({summary, setDisplay}: {summary: SummaryProps, setDisplay:React.Dispatch<React.SetStateAction<Display>>}): JSX.Element {
     return (
         <div className="to-do-summary">

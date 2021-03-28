@@ -17,10 +17,10 @@ function App(): JSX.Element {
   const [tasksState, setTasks] = useState<Task[]>([]);
 
   //this state represents the current messsages in the chat
-  const [messages, setMessages] = useState<Message[]>([{sender:"Clearblade Platform", body: "Welcome!"}])
+  const [messages, setMessages] = useState<Message[]>([{ sender: "Clearblade Platform", body: "Welcome!" }])
 
   //this object contains the total of tasks in Collection (and as bonus the number of tasks that are done)
-  const [taskData, setTasksData] = useState({ tasks_done: 0, tasks_total: 0, messages: messages.length});
+  const [taskData, setTasksData] = useState({ tasks_done: 0, tasks_total: 0, messages: messages.length });
 
   //this state represents what component should be displayed
   const [display, setDisplay] = useState(Display.TaskBoard);
@@ -31,13 +31,13 @@ function App(): JSX.Element {
   useEffect(() => {
     const cb = initializeClearBlade();
     fetchTasksFromCollection(cb, setTasks, setTasksData);
-    //subscribeToCollectionUpdates(cb);
+    subscribeToCollectionUpdates(cb);
   }, [])
 
   return (
     <div className="App">
       <Header></Header>
-      <Body taskData={taskData} tasks={tasksState} display={display} setDisplay={setDisplay} messages = {messages}></Body>
+      <Body taskData={taskData} tasks={tasksState} display={display} setDisplay={setDisplay} messages={messages}></Body>
     </div>
   );
 }
@@ -46,7 +46,7 @@ function App(): JSX.Element {
  * This callback function is used when connecting to the collection in the mounting of the App component.
  * @param err whether the mounting of the component failed
  */
-function initCallback(err: boolean, cb:IClearBlade): void {
+function initCallback(err: boolean, cb: IClearBlade): void {
   if (err) {
     alert("Error connecting to collection :(");
   }
@@ -68,6 +68,8 @@ function initializeClearBlade(): IClearBlade {
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI5MGIxZGY4NTBjZTZlZmQwYjNhN2ZlYmU5MTVkIiwic2lkIjoiZDVjMDU5ZjctYzIyMC00NmZmLWEwZWMtMTRlM2JmMGQyMDc0IiwidXQiOjIsInR0Ij" +
         "oxLCJleHAiOi0xLCJpYXQiOjE2MTY2MzgyMjZ9.Ruhv2MsJLeD2ftznFPwelPazBPDi9uZ9bTFghSxkh4M"
     },
+    messagingAuthPort: 8907,
+    messagingPort: 8903,
     callback: initCallback
   });
 
@@ -91,7 +93,7 @@ function fetchTasksFromCollection(cb: IClearBlade, setTasks: React.Dispatch<Reac
     if (err) {
       alert("An error occurred in fetching data :(");
     } else {
-      let taskArray:Task[] = []
+      let taskArray: Task[] = []
       let numberOfTasksDone = 0;
       dataArray.forEach((collectionRow: any) => {
         let data: any = {}
@@ -127,18 +129,24 @@ function fetchTasksFromCollection(cb: IClearBlade, setTasks: React.Dispatch<Reac
  */
 function subscribeToCollectionUpdates(cb: IClearBlade) {
   const messaging = cb.Messaging({}, err => {
-    if(err) {
-      console.log(err);
-    }
-  });
-  messaging.subscribe("collection/to_do", {},  function (err, payload) {
     if (err) {
-      alert("Something went wrong with connecting to messaging server.");
+      console.log(err);
     } else {
-      console.log(payload);
+
     }
   });
 
+  console.log(messaging);
+
+  //last piece of the puzzle VVVVV
+
+  // messaging.subscribe("collection/to_do", {}, function (err, payload) {
+  //   if (err) {
+  //     alert("Something went wrong with connecting to messaging server.");
+  //   } else {
+  //     console.log(payload);
+  //   }
+  // });
 }
 
 

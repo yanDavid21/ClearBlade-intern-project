@@ -41,6 +41,8 @@ function updateCollections(event: React.ChangeEvent<HTMLInputElement>, item_id: 
         if(err) {
             alert("Something went wrong with the collection updating :(")
             console.log(data);
+        } else {
+            //TODO: publish to topic "collection/to_do"
         }
     });
 }
@@ -67,7 +69,7 @@ export default function ToDo({task}: { task: Task }) {
                 <input
                     name="is_done"
                     type="checkbox"
-                    checked={task.is_done}
+                    defaultChecked={task.is_done}
                     onChange={(e) => updateCollections(e, task.item_id)} />
             </div>
             <div>{trimDateTime(task.due_date)}</div>

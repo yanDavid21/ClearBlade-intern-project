@@ -18,6 +18,11 @@ function renderRows(tasks: Task[]): JSX.Element[] {
     );
 }
 
+/**
+ * Renders the task board with the tasks displayed.
+ * @param param0 an object with attributes denoting whether the taskboard is displayed and a list of tasks to be displayed
+ * @returns a task board containing rendered tasks
+ */
 export default function TaskBoard({ display, tasks }: { display: Display, tasks: Task[] }): JSX.Element {
     return (
         <div className="to-do-taskboard" style={{

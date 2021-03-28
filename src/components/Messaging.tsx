@@ -15,9 +15,15 @@ export type Message = {
 function submitMessage(e: React.FormEvent<HTMLFormElement>, input: string, setInput: React.Dispatch<React.SetStateAction<string>>):void {
     e.preventDefault();
     console.log(input);
+    //TODO: publish to topic "messages"
     setInput("");
 }
 
+/**
+ * Returns a list of rendered messages from a list of Messages
+ * @param messages a list of Messages
+ * @returns JSX.element that holds the content of the message
+ */
 function renderMessages(messages: Message[]):JSX.Element[] {
     let renderedMessages = messages.map((message: Message, index:number):JSX.Element => {
         return <div key={index}>{message.sender}: {message.body} </div>
@@ -25,9 +31,13 @@ function renderMessages(messages: Message[]):JSX.Element[] {
     return renderedMessages;
 }
 
+/**
+ * This functional component represents the messaging board and the message input.
+ * @param param0 an object with attributes that denote whether the component is showing and the messages to be displayed
+ * @returns a JSX.Element that holds the messaging board and message input
+ */
 export default function Messaging({ display, messages}: { display: Display, messages : Message[]}): JSX.Element {
-    const [input, setInput] = useState("")
-
+    const [input, setInput] = useState("") //represents the state of the input textfield
 
     return (
         <div style={{

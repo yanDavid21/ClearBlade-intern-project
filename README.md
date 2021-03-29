@@ -2,7 +2,7 @@
 
 | ![Desktop image of app (taskboard)](./src/resources/desktop.PNG) | 
 |:--:| 
-| ![Desktop image of app(message board](./src/resources/desktop-messageboard.pngG) |
+| ![Desktop image of app(message board](./src/resources/desktop-messageboard.png) |
 |:--:| 
 | *Reminds me I need to take that UI/UX class I've been eyeing soon* |
 
